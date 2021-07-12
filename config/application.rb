@@ -22,15 +22,19 @@ Bundler.require(*Rails.groups)
 module ReactRailsApiProjectTemplate
   class Application < Rails::Application
     # Adding cookies and session middleware
-    config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Session::CookieStore
+    config.load_defaults 6.1
+    config.autoload_paths << "#{Rails.root}/lib"
+
+
+    # config.middleware.use ActionDispatch::Cookies
+    # config.middleware.use ActionDispatch::Session::CookieStore
 
     # Use SameSite=Strict for all cookies to help protect against CSRF
     # https://owasp.org/www-community/SameSite
-    config.action_dispatch.cookies_same_site_protection = :strict
+    # config.action_dispatch.cookies_same_site_protection = :strict
 
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.1
+    # config.load_defaults 6.1
 
     # Configuration for the application, engines, and railties goes here.
     #
