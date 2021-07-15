@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     @user = User.find_by(email: params[:email])
     if @user && @user.authenticate(params[:password])
       # if they're good, create a token
-      token = JWT.encode({ user_id: @user.id }, ENV["itche"], 'HS256')
+      token = JWT.encode({ user_id: @user.id }, ENV['ITCHE'], 'HS256')
 
       # save user_id in session so we can use it in future requests
     #   session[:user_id] = user.id
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     user_params = params.permit(:name, :email, :password, :location)
     user = User.create(user_params)
     if user.valid?
-      token = JWT.encode({ user_id: user.id }, ENV["itche"], 'HS256')
+      token = JWT.encode({ user_id: user.id }, ENV['ITCHE'], 'HS256')
       render json: { user: UserSerializer.new(user), token: token }, status: :created
     else
       render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
